@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/styles/main.css">
+  <title>Wallet</title>
+  <style>
+    /* Add styles for the buttons */
+    .button input[type="button"] {
+      background-color: var(--clr-primary);
+      color: var(--clr-neutral-100);
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    /* Style for the Wallet container */
+    .wallet-container {
+      max-width: 700px;
+      width: 100%;
+      background-color: #ffffff;
+      padding: 25px 30px;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+      margin: 0 auto; /* Center the container */
+    }
+
+    /* Style for the Current Balance div on the top right */
+    .current-balance {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #f0f0f0;
+      padding: 10px 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style for the Transaction History div in the middle */
+    .transaction-history {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .wallet-container {
+        padding: 15px;
+      }
+
+      .current-balance {
+        top: 15px;
+        right: 15px;
+        padding: 8px 15px;
+      }
+
+      .transaction-history {
+        margin-top: 15px;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wallet-container">
+    <div class="title">Wallet</div>
+
+    <!-- Current Balance div on the top right -->
+    <div class="current-balance">
+      Current Balance: <span id="current-balance">0.078 Creds</span>
+    </div>
+
+    <!-- Transaction History div in the middle -->
+    <div class="transaction-history">
+      <h2>Transaction History</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Amount (₹)</th>
+            <th>Amount (Carbon Credits)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2023-09-20</td>
+            <td>Debit</td>
+            <td>-₹200</td>
+            <td>-0.021</td>
+          </tr>
+          <tr>
+            <td>2023-09-18</td>
+            <td>Credit</td>
+            <td>₹300</td>
+            <td>0.037</td>
+          </tr>
+          <!-- Add more transaction rows as needed -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Add Cash-in Button -->
+    <div class="button">
+      <a href="/home.html" id="cash-in-button" style="background-color: #19a850; border-radius: 5px; padding: 10px 20px; color: #fff; text-decoration: none; display: inline-block; cursor: pointer;">Home</a>
+      <div class="button" style="position: absolute; top: 450px; right: 20px;">
+        <a href="home.html" id="cash-in-button" style="background-color: #19a850; border-radius: 5px; padding: 10px 20px; color: #fff; text-decoration: none; display: inline-block; cursor: pointer;">Cash In</a>
+    </div>
+    
+</body>
+</html>
