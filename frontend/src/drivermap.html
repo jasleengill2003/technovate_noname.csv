@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/assets/styles/drivermap.css">
+    <title>Google Maps with User Addresses</title>
+</head>
+<body>
+    <form id="addressForm" style="margin-top: 2rem;">
+        <div id="addressContainer">
+            <div class="address-input">
+                <label for="address1">Address 1:</label>
+                <input type="text" id="address1" name="address1" required><br><br>
+            </div>
+
+            <div class="address-input">
+                <label for="address2">Address 2:</label>
+                <input type="text" id="address2" name="address2" required><br><br>
+            </div>
+        </div>
+
+        <button type="button" id="addAddress">Add Address</button>
+        <button type="submit">Show Map</button>
+    </form>
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m4!1m3!1d0!2d0!3d0!2m1!1s" width="100%" height="600" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" id="mapIframe"></iframe>
+
+    <!-- End Trip Button -->
+    <a href="/cc.html" class="btn end-trip-button" style="background-color: #a81919; border-radius: 5px; text-decoration: none; display: inline-block; padding: 10px 20px; color: #fff;">End Trip</a>
+
+    <!-- Chat Button -->
+    <div class="button" style="position: absolute; top: 845px; right: 20px;">
+        <a href="chat.html" id="chat-button" style="background-color: #3b34bb; border-radius: 5px; padding: 10px 20px; color: #fff; text-decoration: none; display: inline-block; cursor: pointer;">Chat</a>
+    </div>
+
+
+    <script>
+        const addressForm = document.getElementById('addressForm');
+        const mapIframe = document.getElementById('mapIframe');
+        const addressContainer = document.getElementById('addressContainer');
+        const addAddressButton = document.getElementById('addAddress');
+
+        let addressCounter = 2; // Start with 2 address inputs
+
+        addAddressButton.addEventListener('click', function() {
+            if (addressCounter < 4) { // Limit to a maximum of 4 addresses
+                addressCounter++;
+                const newAddressInput = document.createElement('div');
+                newAddressInput.classList.add('address-input');
+                newAddressInput.innerHTML = `
+                    <label for="address${addressCounter}">Address ${addressCounter}:</label>
+                    <input type="text" id="address${addressCounter}" name="address${addressCounter}" required><br><br>
+                `;
+                addressContainer.appendChild(newAddressInput);
+            }
+        });
+
+        addressForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get user-provided addresses
+            const addresses = [];
+            for (let i = 1; i <= addressCounter; i++) {
+                const address = encodeURIComponent(document.getElementById(`address${i}`).value);
+                addresses.push(address);
+            }
+
+            
+
+            // Construct the iframe URL with the provided addresses
+            const iframeUrl = `https://www.google.com/maps/embed?pb=!1m40!1m12!1m3!1d120662.55140691483!2d72.78377576176763!3d19.07671544047451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m25!3e0!4m5!1s0x3be7b6266473b28f%3A0xfeceacda6d0ba826!2sTextile%20Technician%20Co-operative%20Housing%20Society%2C%20Creative%20Soul%2C%20Veera%20Desai%20Road%2C%20Industrial%20Area%2C%20Andheri%20West%2C%20Mumbai%2C%20Maharashtra!3m2!1d19.131964399999998!2d72.8372392!4m5!1s0x3be7c7c9401fcf95%3A0x70b633cc1c9b540f!2sKalpataru%20Aura%2C%20KALPATARU%20AURA%2C%20Nityanand%20Nagar%2C%20Ghatkopar%20West%2C%20Mumbai%2C%20Maharashtra!3m2!1d19.096712!2d72.917498!4m5!1s0x3be7c9ddefbc3a0f%3A0xe25f57b321f3ed8f!2sMAHALAXMI%20TOWERS%2C%20New%20D.%20N.%20Nagar%2C%20D.N.Nagar%2C%20Andheri%20West%2C%20Mumbai%2C%20Maharashtra!3m2!1d19.1197557!2d72.82883819999999!4m5!1s0x3be7cebf9d6a5c79%3A0xcf7320bafdd46fe7!2sAmogh%2C%20Murari%20Ghag%20Marg%2C%20Century%20Bazaar%2C%20Prabhadevi%2C%20Mumbai%2C%20Maharashtra!3m2!1d19.0141377!2d72.8270538!5e0!3m2!1sen!2sin!4v1694894690539!5m2!1sen!2sin`;
+            
+            // Update the iframe's src attribute to display the map with directions
+            mapIframe.src = iframeUrl;
+        });
+    </script>
+</body>
+</html>
