@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <title>Carpool Results</title>
+    <style>
+        .button input[type="button"] {
+            background-color: var(--clr-primary);
+            color: var(--clr-neutral-100);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .content .title {
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 90%;  
+            max-height: 90%;  
+            margin: 2% auto;  
+            padding: 25px 2%;  
+        }
+        .recommendation-card {
+            padding: 10px;
+            border: 1px solid var(--clr-neutral-400);
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <div class="title">Carpool Recommendations</div>
+        {% if has_recommendations %}
+        
+
+            {% for recommendation in recommendations.itertuples %}
+                <div class="recommendation-card">
+                    <strong>User ID:</strong> {{ recommendation.User_ID|default:"N/A" }}<br>
+                    <strong>Name:</strong> {{ recommendation.Name }}<br>
+                    <strong>Age:</strong> {{ recommendation.Age }}<br>
+                    <strong>Gender:</strong> {{ recommendation.Gender }}<br>
+                    <strong>Preferred Mode of Travel:</strong> {{ recommendation.Preferred_Mode_of_Travel }}<br>
+                    <strong>Time of Departure:</strong> {{ recommendation.Time_of_Departure }}<br>
+                    <strong>Specific Address:</strong> {{ recommendation.Specific_Address }}<br>
+                    <strong>Destination Address:</strong> {{ recommendation.Destination_Address }}<br>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No carpool recommendations found based on your preferences.</p>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>
