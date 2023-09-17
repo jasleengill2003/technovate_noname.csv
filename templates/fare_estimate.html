@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <title>Fare Estimation</title>
+    <style>
+        .button input[type="button"], .button input[type="submit"] {
+            background-color: var(--clr-primary);
+            color: var(--clr-neutral-100);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="title">Fare Estimation</div>
+    <div class="content">
+        <form id="fare-form" method="post" action="/calculate_fare/">
+            {% csrf_token %}
+            <div class="input-box">
+                <span class="details">Starting Place:</span>
+                <input type="text" name="start_name" placeholder="Enter starting place" required>
+            </div>
+            <div class="input-box">
+                <span class="details">Destination Place:</span>
+                <input type="text" name="end_name" placeholder="Enter destination place" required>
+            </div>
+            <div class="input-box">
+                <span class="details">Mode of Transport:</span>
+                <select name="mode_of_transport">
+                    <option value="auto">Auto</option>
+                    <option value="cab">Cab</option>
+                    <option value="taxi">Taxi</option>
+                </select>
+            </div>
+            <div class="button">
+                <input type="submit" value="Calculate Fare">
+            </div>
+        </form>
+    </div>
+    <div>
+        {% if fare and adjusted_time %}
+            <h3>Results</h3>
+            <p>Travel time will take roughly {{ adjusted_time }} minutes.</p>
+            <p>The estimated fare is approximately {{ fare }} INR.</p>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>
