@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+  <title>Carpool Booking</title>
+  <!-- Include any necessary JavaScript libraries for map integration -->
+  <style>
+    /* Add styles for the buttons */
+    .button input[type="button"] {
+      background-color: var(--clr-primary);
+      color: var(--clr-neutral-100);
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">Carpool Booking</div>
+    <div class="content">
+      <form id="booking-form" method="post" action="/booking/">{% csrf_token %}
+        <div class="input-box">
+          <span class="details">Pickup Location</span>
+          <input type="text" id="pickup-location" name="pickup-location" placeholder="Enter pickup location" required>
+      </div>
+      <div class="input-box">
+          <span class="details">Destination</span>
+          <input type="text" id="destination" name="destination" placeholder="Enter destination" required>
+      </div>
+        <div class="input-box">
+          <span class="details">Minimum Age preference</span>
+          <input type="number" id="age-min" name="age-min" min="1" placeholder="Enter minimum preferred age" required>
+      </div>
+      <div class="input-box">
+          <span class="details">Maximum Age preference</span>
+          <input type="number" id="age-max" name="age-max" min="1" placeholder="Enter maximum preferred age" required>
+      </div>
+      <div class="input-box">
+        <span class="details">Gender Preference</span>
+        <select id="gender-preference" name="gender-preference">
+            <option value="any">Any</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+    </div>
+        <div class="input-box">
+          <span class="details">Mode of Transport</span>
+          <select id="mode-of-transport" name="mode_of_transport">
+            <option value="taxi">taxi</option>
+            <option value="rickshaw">rickshaw</option>
+            <option value="cab">cab</option>
+            <option value="Personal Car">personal car</option>
+            <!-- Add other modes as necessary -->
+          </select>
+        </div>
+        
+        <div class="input-box">
+          <span class="details">Carpool Now</span>
+          <input type="checkbox" id="carpool-now" name="carpool_now" value="true">
+        </div>
+        
+        <div class="input-box">
+          <span class="details">Current Time</span>
+          <input type="time" id="current-time" name="current_time" required>
+        </div>
+        
+        <div class="input-box">
+          <span class="details">Cost Sharing</span>
+          <select id="cost-sharing" name="cost_sharing">
+            <option value="By Time">By Time</option>
+            <option value="By Distance">By Distance</option>
+            <!-- Add other options as necessary -->
+          </select>
+        </div>
+
+        <div class="button">
+          <input type="submit" value="Book Now">
+        </div>
+        <div class="button">
+            <!-- Replace "Calculate Fare" button with "Book Now" button -->
+            <a href="{% url 'ride' %}" class="btn" style="background-color: #19a850; border-radius: 5px; text-decoration: none; display: inline-block; padding: 10px 20px; color: #fff;">Check Route</a>
+          </div>
+          
+      </form>
+      
+      
+
+      
+</body>
+</html>
